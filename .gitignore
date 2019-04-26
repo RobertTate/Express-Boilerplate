@@ -1,0 +1,7 @@
+node_modules
+server/lib
+client/dist
+**/*/ENV_VAR
+ENV_VAR
+**/env/development.js
+development.js

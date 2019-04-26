@@ -1,0 +1,25 @@
+{
+  "name": "TensorFlowPlayground",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "main": "server/lib/index.js",
+  "scripts": {
+    "build": "babel ./server/src -d ./server/lib",
+    "start": "node ./server/lib/index.js"
+  },
+  "author": "RobertTate",
+  "repository": "git@github.com:RobertTate/TensorFlowPlayground.git",
+  "license": "MIT",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3"
+  }
+}
