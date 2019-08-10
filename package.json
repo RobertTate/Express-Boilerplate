@@ -6,8 +6,16 @@
   },
   "main": "server/lib/index.js",
   "scripts": {
-    "build": "babel ./server/src -d ./server/lib",
-    "start": "node ./server/lib/index.js"
+    "build:client": "webpack",
+    "build:server": "babel ./server/src -d ./server/lib",
+    "clean": "yarn clean:client && yarn clean:server",
+    "clean:client": "rimraf ./client/dist",
+    "clean:server": "rimraf ./server/lib",
+    "dev": "yarn clean && yarn build:server && concurrently -r -k \"yarn watch:client\" \"yarn watch:server\" \"nodemon --watch server/lib --delay 1\"",
+    "start": "yarn clean && yarn build:client && yarn build:server && yarn start:server",
+    "start:server": "node ./server/lib/index.js",
+    "watch:client": "webpack --watch",
+    "watch:server": "babel ./server/src -w -d ./server/lib"
   },
   "author": "RobertTate",
   "repository": "git@github.com:RobertTate/TensorFlowPlayground.git",
@@ -15,11 +23,26 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "express": "^4.16.4",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.33.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3"
+    "@babel/preset-env": "^7.4.3",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^4.1.0",
+    "css-loader": "^2.1.1",
+    "extract-loader": "^3.1.0",
+    "file-loader": "^4.0.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.3.3"
   }
 }

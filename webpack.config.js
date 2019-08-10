@@ -1,12 +1,49 @@
 const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const CLIENT_DEST = path.join(__dirname, './client/dist');
+const assetPath = '/client/';
+const distPath = `${assetPath}dist`;
+const srcPath = `${assetPath}src`;
 
 module.exports = {
-    entry: ['babel-polyfill', './client/js/main.js'],
-    output: { path: CLIENT_DEST, filename: 'bundle.js' },
+    mode: 'production',
+    context: path.join(__dirname, srcPath),
+    entry: ['babel-polyfill', './js/main.js', './scss/main.scss'],
+    output: {
+        filename: '[name].min.js',
+        path: path.join(__dirname, distPath, '/js')
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '../css/[name].min.css'
+        })
+    ],
     module: {
         rules: [
+            {
+                test: /\.s(a|c)ss$/,
+                include: /(sass)/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    {
+                        loader: 'sass-loader',
+                    }
+                ]
+            },
+            {
+                test: /\.js$/,
+                include: /(js)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true
+                    }
+                }
+            },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: {
@@ -33,19 +70,10 @@ module.exports = {
                     { loader: "style-loader" },
                     { loader: "css-loader" }
                 ]
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                    "babel-loader",
-                    {
-                        loader: "react-svg-loader"
-                    }
-                ]
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js']
     }
 }
