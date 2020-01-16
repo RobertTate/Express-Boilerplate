@@ -23,15 +23,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s(a|c)ss$/,
-                include: /(sass)/,
+                test: /\.s[c|a]ss$/,
                 use: [
+                    'style-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                    }
+                    'sass-loader'
                 ]
             },
             {
@@ -63,13 +61,6 @@ module.exports = {
                         outputPath: 'docs'
                     }
                 }
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" }
-                ]
             }
         ]
     },
