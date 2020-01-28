@@ -1,5 +1,5 @@
 {
-  "name": "TensorFlowPlayground",
+  "name": "Express-Boilerplate",
   "version": "1.0.0",
   "engines": {
     "node": "10.15.3"
@@ -18,7 +18,7 @@
     "watch:server": "babel ./server/src -w -d ./server/lib"
   },
   "author": "RobertTate",
-  "repository": "git@github.com:RobertTate/TensorFlowPlayground.git",
+  "repository": "git@github.com:RobertTate/Express-Boilerplate.git",
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
